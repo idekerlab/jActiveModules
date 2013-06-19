@@ -1761,7 +1761,7 @@ public class ActivePathsParameterPanel extends JPanel implements ItemListener,
 	
 	@Override
 	public void handleEvent(ColumnCreatedEvent e) {
-		updateAttributePanel();
+		//updateAttributePanel();
 	}
 
 	public void handleEvent(CytoPanelComponentSelectedEvent e){
