@@ -26,7 +26,7 @@ public class ActiveModulesCytoPanelComponent implements CytoPanelComponent {
 
 	@Override
 	public String getTitle() {
-		return "jActiveMNodules";
+		return "jActiveModules";
 	}
 
 	@Override
