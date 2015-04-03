@@ -6,10 +6,6 @@
 //-----------------------------------------------------------------------------------
 package csplugins.jActiveModules;
 //-----------------------------------------------------------------------------------
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyEdge.Type;
-
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -18,7 +14,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
-import java.util.ArrayList;
+
+import org.cytoscape.model.CyEdge.Type;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+
+import cern.colt.list.IntArrayList;
+import cern.colt.map.OpenIntDoubleHashMap;
 //import cytoscape.data.Semantics;
 //-----------------------------------------------------------------------------------
 /**
@@ -698,148 +700,7 @@ public class Component implements Comparable{
 		  
 		  regionScoring = true;
 		  
-	  }
-	  
+	  } 
   }
-
-  
-
-  // replace "cern.colt.list.OpenIntDoubleHashMap"
-  private class OpenIntDoubleHashMap {
-	  private HashMap<Integer, Double> hashMap = new HashMap<Integer, Double>();
-	  private int size =-1;
-	  private IntArrayList arrayList;
-	  
-	  public OpenIntDoubleHashMap(int size){
-		  this.size = size;
-	  }
-	  
-	  public void put(Integer index, double score){
-		  this.hashMap.put(index, score);
-	  }
-	  
-	  public void keysSortedByValue(IntArrayList arrayList){
-		  this.arrayList = arrayList; 
-		  
-		  Iterator<Integer> it =hashMap.keySet().iterator();
-		  while(it.hasNext()){
-			  this.arrayList.add(it.next());
-		  }
-		  		  
-		  quicksort(0, this.size - 1);
-	  }
-	  
-	  private void quicksort(int low, int high) {
-		  int i = low, j = high;
-		  // Get the pivot element from the middle of the list
-		  Double pivot = this.hashMap.get(this.arrayList.get(new Integer(low + (high-low)/2)));
-
-		  // Divide into two lists
-		  while (i <= j) {
-			  // If the current value from the left list is smaller then the pivot
-			  // element then get the next element from the left list
-			  
-			  while (this.hashMap.get(this.arrayList.get(i)) < pivot) {
-				  i++;
-			  }
-			  // If the current value from the right list is larger then the pivot
-			  // element then get the next element from the right list
-			  while (this.hashMap.get(this.arrayList.get(j)) > pivot) {
-				  j--;
-			  }
-
-			  // If we have found a values in the left list which is larger then
-			  // the pivot element and if we have found a value in the right list
-			  // which is smaller then the pivot element then we exchange the
-			  // values.
-			  // As we are done we can increase i and j
-			  if (i <= j) {
-				  swap(i, j);
-				  i++;
-				  j--;
-			  }
-		  }
-		  // Recursion
-		  if (low < j)
-			  quicksort(low, j);
-		  if (i < high)
-			  quicksort(i, high);
-	  }
-
-	  private void swap(int i, int j) {
-		  Integer temp = this.arrayList.get(i); 
-		  this.arrayList.set(i, this.arrayList.get(j));
-		  
-		  this.arrayList.set(j, temp);
-		  
-	  }
-
-  }
-  
-  // replace "cern.colt.list.IntArrayList"
-  private class IntArrayList {
-	  private ArrayList<Integer> intArray;
-	  public IntArrayList(int size){
-		  this.intArray = new ArrayList<Integer>(size);
-	  }
-	  
-	  public int size(){
-		  return intArray.size();
-	  }
-	  
-	  public int get(int index){
-		  return this.intArray.get(index);
-	  }
-
-	  public void add(int value){
-		  this.intArray.add(value);
-	  }
-	  
-	  public void set(int index, int value){
-		  this.intArray.set(index, new Integer(value));
-	  }
-
-	  
-	  public void reverse(){
-		  		  
-		  int size = this.intArray.size();
-		  ArrayList<Integer> tmpList = new ArrayList<Integer>(size);
-		  for (int i=0; i< size; i++){
-			  tmpList.add(this.intArray.get(size-1-i));
-		  }
-		  this.intArray = tmpList;
-	  }
-  }
-
-
-/////For test only /////////////
-	public static void main(String [] args){
-		Component cmt = new Component(1.0);
-	}
-	
-	// For test only -- test the inner class OpenIntDoubleHashMap
-	  public Component(double d){
-			IntArrayList intArrayList = new IntArrayList(3);
-			
-			OpenIntDoubleHashMap map = new OpenIntDoubleHashMap(3);
-			map.put(4, 0.5);
-			map.put(8, 0.6);
-			map.put(1, 0.2);
-			
-			map.keysSortedByValue(intArrayList);
-
-			// Expect output, 1,4,8
-			System.out.println(intArrayList.get(0));
-			System.out.println(intArrayList.get(1));
-			System.out.println(intArrayList.get(2));
-			
-			intArrayList.reverse();
-			// Expect output, 8,4,1
-			System.out.println("\nAfter reverse\n"+intArrayList.get(0));
-			System.out.println(intArrayList.get(1));
-			System.out.println(intArrayList.get(2));
-						
-			
-	  }
 }
 
