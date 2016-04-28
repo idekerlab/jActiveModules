@@ -2,7 +2,9 @@
 
 1. Functional modules can be suggested by highly-connected network regions with similar responses to experimental conditions. These patterns can be detected visually, but in practice the high level of connectivity in interaction networks makes visual detection difficult. Putative modules can be identified with the jActiveModules plugin as follows. Further details are available in the original publication.
   1. Critical Step: Under the **Plugins** menu select **jActiveModules**. This will bring up a jActiveModules section on the Control Panel, listing the available expression experiments.
+  
   1. Critical Step: Select all of your expression experiments by clicking on them with the left mouse button (One can run **jActiveModules** on only one expression experiment, or on a subset of the experiments).
+  
   1. In the **General Parameters** panel, keep the default values, as these are effective for most initial analyses.
     1. **Number of Paths** indicates the number of putative modules that will be reported.
     1. **Adjust score for size** corrects for the fact that a larger putative module is more likely to contain nodes with significant p-values by random chance.
