@@ -55,7 +55,7 @@ public class CyActivator extends AbstractCyActivator {
 		LoadVizmapFileTaskFactory loadVizmapFileTaskFactory =  getService(bc,LoadVizmapFileTaskFactory.class);
 		SynchronousTaskManager synchronousTaskManagerServiceRef = getService(bc,SynchronousTaskManager.class);
 
-		CyHelpBroker cyHelpBroker = getService(bc, CyHelpBroker.class);
+		//CyHelpBroker cyHelpBroker = getService(bc, CyHelpBroker.class);
 
 		//
 		ServicesUtil.cySwingApplicationServiceRef = cySwingApplicationServiceRef;
@@ -73,7 +73,7 @@ public class CyActivator extends AbstractCyActivator {
 		ServicesUtil.cyLayoutsServiceRef = cyLayoutsServiceRef;
 		ServicesUtil.loadVizmapFileTaskFactory = loadVizmapFileTaskFactory;
 		ServicesUtil.synchronousTaskManagerServiceRef = synchronousTaskManagerServiceRef;
-		ServicesUtil.cyHelpBrokerServiceRef = cyHelpBroker;
+		//ServicesUtil.cyHelpBrokerServiceRef = cyHelpBroker;
 
 		//
 		

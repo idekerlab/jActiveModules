@@ -10,6 +10,7 @@ package csplugins.jActiveModules.dialogs;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -28,16 +29,21 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
+
 import javax.swing.AbstractAction;
+import javax.swing.AbstractCellEditor;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
@@ -45,53 +51,36 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+
+import org.cytoscape.application.swing.events.CytoPanelComponentSelectedEvent;
+import org.cytoscape.application.swing.events.CytoPanelComponentSelectedListener;
+import org.cytoscape.model.CyColumn;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyTable;
+import org.cytoscape.model.CyTableUtil;
+import org.cytoscape.model.events.ColumnCreatedEvent;
+import org.cytoscape.model.events.ColumnCreatedListener;
+import org.cytoscape.util.swing.ColumnResizer;
 import org.jdesktop.layout.GroupLayout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.JTable;
-
 import csplugins.jActiveModules.ActiveModulesUI;
-import csplugins.jActiveModules.CyHelpBrokerImpl;
+import csplugins.jActiveModules.ServicesUtil;
 import csplugins.jActiveModules.data.ActivePathFinderParameters;
-
-import org.cytoscape.application.CyApplicationManager;
-import org.cytoscape.application.swing.CySwingApplication;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNetworkManager;
-import org.cytoscape.model.CyTable;
 //import cytoscape.view.CyHelpBroker;
 import csplugins.jActiveModules.util.swing.NetworkSelectorPanel;
-import java.awt.Component;
-import javax.swing.table.TableColumn;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.table.TableCellEditor;
-import javax.swing.AbstractCellEditor;
-import javax.swing.DefaultCellEditor;
-import java.util.Collection;
-import javax.swing.JOptionPane;
-import javax.swing.event.CellEditorListener;
-import javax.swing.event.ChangeEvent;
-import java.util.Comparator;
-import org.cytoscape.util.swing.ColumnResizer;
-import org.cytoscape.model.CyColumn;
-import java.util.Iterator;
-import org.cytoscape.model.CyTableUtil;
-import org.cytoscape.model.events.ColumnCreatedEvent;
-import org.cytoscape.model.events.ColumnCreatedListener;
-import org.cytoscape.application.swing.events.CytoPanelComponentSelectedListener;
-import org.cytoscape.application.swing.events.CytoPanelComponentSelectedEvent;
-import org.cytoscape.application.swing.CytoPanelComponent;
-import csplugins.jActiveModules.ServicesUtil;
 
 public class ActivePathsParameterPanel extends JPanel implements ItemListener,
 		ColumnCreatedListener, CytoPanelComponentSelectedListener {
@@ -532,11 +521,14 @@ public class ActivePathsParameterPanel extends JPanel implements ItemListener,
 				row[0] = name;
 				
 				boolean isPValue = true;
-				for ( Object value : vals ) {
-					double d = ((Double)value).doubleValue();	
-				if ( d < 0 || d > 1 ) {
+
+				for ( Iterator<Double> i = vals.iterator(); i.hasNext(); ) {
+					Double value = i.next();
+					if (value == null) {
+						i.remove();
+					}
+					else if ( value < 0 || value > 1 ) {
 						isPValue = false;
-						break;
 					}
 				}
 

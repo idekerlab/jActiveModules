@@ -80,7 +80,7 @@ public class ActiveModulesUI extends AbstractCyAction { //implements CytoscapeSt
 		//Cytoscape.getPropertyChangeSupport().addPropertyChangeListener(this);
 		
 		cytoPanelWest = ServicesUtil.cySwingApplicationServiceRef.getCytoPanel(CytoPanelName.WEST);
-		addHelp();
+		//addHelp();
 	}
 
 	
@@ -104,21 +104,21 @@ public class ActiveModulesUI extends AbstractCyAction { //implements CytoscapeSt
 		cytoPanelWest.setSelectedIndex(index);		
 	}
 	
-	/**
-	 *  Hook plugin help into the Cytoscape main help system:
-	 */
-	private void addHelp() {
-		final String HELP_SET_NAME = "/help/jhelpset";
-		final ClassLoader classLoader = ActiveModulesUI.class.getClassLoader();
-		URL helpSetURL;
-		try {
-			helpSetURL = HelpSet.findHelpSet(classLoader, HELP_SET_NAME);
-			final HelpSet newHelpSet = new HelpSet(classLoader, helpSetURL);
-			ServicesUtil.cyHelpBrokerServiceRef.getHelpSet().add(newHelpSet);
-		} catch (final Exception e) {
-			logger.warn("Could not find help set: \"" + HELP_SET_NAME + "!");
-		}
-	}
+//	/**
+//	 *  Hook plugin help into the Cytoscape main help system:
+//	 */
+//	private void addHelp() {
+//		final String HELP_SET_NAME = "/help/jhelpset";
+//		final ClassLoader classLoader = ActiveModulesUI.class.getClassLoader();
+//		URL helpSetURL;
+//		try {
+//			helpSetURL = HelpSet.findHelpSet(classLoader, HELP_SET_NAME);
+//			final HelpSet newHelpSet = new HelpSet(classLoader, helpSetURL);
+//			ServicesUtil.cyHelpBrokerServiceRef.getHelpSet().add(newHelpSet);
+//		} catch (final Exception e) {
+//			logger.warn("Could not find help set: \"" + HELP_SET_NAME + "!");
+//		}
+//	}
 
 //	public void handleEvent(CytoscapeStartEvent e){
 //		//evt.getPropertyName() == Cytoscape.CYTOSCAPE_INITIALIZED

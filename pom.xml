@@ -13,7 +13,7 @@
 		<mockito.version>1.8.5</mockito.version>
 	</properties>
 
-	<version>3.2</version>
+	<version>3.2.1</version>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>csplugin</groupId>

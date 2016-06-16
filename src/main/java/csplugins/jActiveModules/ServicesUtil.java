@@ -44,5 +44,5 @@ public class ServicesUtil {
 	public static LoadVizmapFileTaskFactory loadVizmapFileTaskFactory;
 	
 	public static SynchronousTaskManager synchronousTaskManagerServiceRef;
-	public static CyHelpBroker cyHelpBrokerServiceRef;
+	//public static CyHelpBroker cyHelpBrokerServiceRef;
 }
